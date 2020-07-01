@@ -4,7 +4,6 @@
 
 int main()
 {
-    network::slib::socket client;
-    client.print();
+    network::slib::socket server{"127.0.01:8080"};
     return 0;
 }
