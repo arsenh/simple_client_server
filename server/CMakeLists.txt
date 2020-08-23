@@ -19,9 +19,10 @@ set_property(TARGET server PROPERTY
 target_include_directories(server
     PUBLIC 
         ${CMAKE_SOURCE_DIR}/socket_lib/
+        ${CMAKE_SOURCE_DIR}/logger/
 )
 
 target_link_libraries( server
     PRIVATE 
-        socket_lib
+        logger socket_lib
 )

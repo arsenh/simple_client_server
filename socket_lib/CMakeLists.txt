@@ -11,3 +11,13 @@ set(HEADERS
 )
 
 add_library(socket_lib STATIC ${SOURCES} ${HEADERS})
+
+set_property(TARGET socket_lib PROPERTY
+    CXX_STANDARD 17
+)
+
+target_link_libraries( socket_lib
+    PRIVATE
+        logger
+)
+
