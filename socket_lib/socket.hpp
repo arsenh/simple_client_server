@@ -22,12 +22,12 @@ namespace dolly::network::networklib
 	
 	public:
 		explicit TcpSocket(std::string_view address);
-		void listenConnections();
-		connection connectToHost();
-		connection acceptConnection();
-		void sendData(connection con, std::string_view buffer);
-		std::pair<int, std::string> receiveData(connection con);
-		void closeConnection(connection con);
+		void listenConnections() const;
+		connection connectToHost() const;
+		connection acceptConnection() const;
+		void sendData(connection con, std::string_view buffer) const;
+		std::pair<int, std::string> receiveData(connection con) const;
+		void closeConnection(connection con) const;
 		virtual ~TcpSocket();
 	};
 }

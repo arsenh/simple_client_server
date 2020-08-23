@@ -31,14 +31,15 @@ TcpSocket(std::string_view address)
 	if (0 > mDescriptor) {
 		throw std::runtime_error("Socket creation Error");
 	}
-	//if (setsockopt(mDescriptor, SOL_SOCKET, SO_REUSEADDR, nullptr, sizeof(int)) < 0) {
-	//	throw std::runtime_error("socketopt Error");
-	//}
+	char optval = 1;
+	if (setsockopt(mDescriptor, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof(int)) < 0) {
+		throw std::runtime_error("socketopt Error");
+	}
 	parseAddress(std::string(address));
 }
 
 void dolly::network::networklib::TcpSocket::
-listenConnections()
+listenConnections() const
 {
 	assert(0 < mDescriptor);
 	sockaddr_in addr;
@@ -56,7 +57,7 @@ listenConnections()
 
 dolly::network::networklib::TcpSocket::connection
 dolly::network::networklib::TcpSocket::
-connectToHost()
+connectToHost() const
 {
 	assert(0 < mDescriptor);
 	sockaddr_in addr;
@@ -73,14 +74,14 @@ connectToHost()
 
 dolly::network::networklib::TcpSocket::connection
 dolly::network::networklib::TcpSocket::
-acceptConnection()
+acceptConnection() const
 {
 	assert(0 < mDescriptor);
 	return accept(mDescriptor, NULL, NULL);
 }
 
 void dolly::network::networklib::TcpSocket::
-sendData(connection con, std::string_view buffer)
+sendData(connection con, std::string_view buffer) const
 {
 	assert(0 < mDescriptor);
 	const int size = static_cast<int>(std::size(buffer)) + 1;
@@ -88,7 +89,7 @@ sendData(connection con, std::string_view buffer)
 }
 
 std::pair<int, std::string> dolly::network::networklib::TcpSocket::
-receiveData(connection con)
+receiveData(connection con) const
 {
 	char buffer[receive_data_size];
 	int length = recv(con, buffer, receive_data_size, 0);
@@ -96,13 +97,15 @@ receiveData(connection con)
 }
 
 void dolly::network::networklib::TcpSocket::
-closeConnection(connection con)
+closeConnection(connection con) const
 {
 	assert(0 < mDescriptor);
 	#ifdef __linux__
 		close(con);
+		shutdown(mDescriptor, SHUT_RDWR);
 	#elif __WIN32
 		closesocket(con);
+		shutdown(mDescriptor, SD_BOTH);
 	#endif
 }
 

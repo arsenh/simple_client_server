@@ -7,38 +7,45 @@
 #include <thread>
 #include <chrono>
 
+using Socket = dolly::network::networklib::TcpSocket;
+using connection = Socket::connection;
+
 void to_upper(std::string& str)
 {
 	std::transform(std::begin(str), std::end(str), std::begin(str), ::toupper);
 }
 
+
+void handle_client_connection(const Socket& server, const connection socket)
+{
+	while (true) {
+		auto [length, data] = server.receiveData(socket);
+		std::cout << "server received data from connectes host" << std::endl;
+		if (length < 0) {
+			//throw std::exception("Server Receive data Error");
+			std::cout << "Client sended FIN: length < 0 = " << length << std::endl;
+			break;
+		} else if (length == 0) {
+			std::cout << "Client sended FIN: length == 0 = " << length << std::endl;
+			break;
+		}
+		to_upper(data);
+		std::cout << "Server send UPPER data to host" << std::endl;
+		server.sendData(socket, data);
+	}
+}
+
 void server_run()
 {
-	using Socket = dolly::network::networklib::TcpSocket;
-	using connection = Socket::connection;
 	std::string address = "0.0.0.0:8080";
 	Socket server{ address };
 	server.listenConnections();
 	std::cout << "Server started on address: " << address << std::endl;
 	while (true) {
-		connection slave_socket = server.acceptConnection();
+		connection con = server.acceptConnection();
 		std::cout << "\naccept connection" << std::endl;
-		assert(slave_socket > 0);
-		while (true) {
-			auto [length, data] = server.receiveData(slave_socket);
-			std::cout << "server received data from connectes host" << std::endl;
-			if (length < 0) {
-				//throw std::exception("Server Receive data Error");
-				std::cout << "Client sended FIN: length < 0 = " << length << std::endl;
-				break;
-			} else if (length == 0) {
-				std::cout << "Client sended FIN: length == 0 = " << length << std::endl;
-				break;
-			}
-			to_upper(data);
-			std::cout << "Server send UPPER data to host" << std::endl;
-			server.sendData(slave_socket, data);
-		}
+		assert(con > 0);
+		handle_client_connection(server, con);
 	}
 }
 
