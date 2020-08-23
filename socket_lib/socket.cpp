@@ -42,6 +42,7 @@ listenConnections()
 {
 	assert(0 < mDescriptor);
 	sockaddr_in addr;
+	memset(&addr, 0, sizeof(addr));
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(std::atoi(mPort.data()));
 	addr.sin_addr.s_addr = inet_addr(mIpV4.data());
@@ -59,6 +60,7 @@ connectToHost()
 {
 	assert(0 < mDescriptor);
 	sockaddr_in addr;
+	memset(&addr, 0, sizeof(addr));
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(std::atoi(mPort.data()));
 	addr.sin_addr.s_addr = inet_addr(mIpV4.data());

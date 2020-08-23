@@ -20,14 +20,12 @@ void server_run()
 	Socket server{ address };
 	server.listenConnections();
 	std::cout << "Server started on address: " << address << std::endl;
-	while (true)
-	{
-		connection con = server.acceptConnection();
+	while (true) {
+		connection slave_socket = server.acceptConnection();
 		std::cout << "\naccept connection" << std::endl;
-		assert(con > 0);
-		while (true)
-		{
-			auto [length, data] = server.receiveData(con);
+		assert(slave_socket > 0);
+		while (true) {
+			auto [length, data] = server.receiveData(slave_socket);
 			std::cout << "server received data from connectes host" << std::endl;
 			if (length < 0) {
 				//throw std::exception("Server Receive data Error");
@@ -39,7 +37,7 @@ void server_run()
 			}
 			to_upper(data);
 			std::cout << "Server send UPPER data to host" << std::endl;
-			server.sendData(con, data);
+			server.sendData(slave_socket, data);
 		}
 	}
 }
