@@ -10,7 +10,7 @@ void client_run()
 	using connection = Socket::connection;
 	const std::string address = "127.0.0.1:8080";
 	std::string send_data;
-	Socket client{ "127.0.0.1:8080" };
+	Socket client{ address };
 	const connection con = client.connectToHost();
 	std::cout << "Client connected to address: " << address << std::endl;
 
@@ -25,7 +25,7 @@ void client_run()
 		client.sendData(con, send_data);
 		const auto [length, data] = client.receiveData(con);
 		if (length < 0) {
-			throw std::exception("Client Receive data Error");
+			throw std::runtime_error("Client Receive data Error");
 		}
 		std::cout << "Server sended following data: " << data << std::endl;
 	}

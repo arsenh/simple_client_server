@@ -4,6 +4,7 @@
 #include <cassert>
 #include <chrono>
 #include <algorithm>
+#include <cstring>
 
 dolly::logger::logger& dolly::logger::logger::
 get() noexcept

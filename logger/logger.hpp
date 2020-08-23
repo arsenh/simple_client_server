@@ -15,7 +15,7 @@ namespace dolly::logger {
 	private:
 		level mLevel;
 		std::ofstream mFileStream;
-		static constexpr std::array<char*, 9> levels{"NONE", "FATAL", "CRITICAL",
+		static constexpr std::array<const char*, 9> levels{"NONE", "FATAL", "CRITICAL",
 			                                         "ERROR", "WARNING", "NOTICE",
 			                                         "INFORMATION", "DEBUG", "TRACE"};
 	public:
