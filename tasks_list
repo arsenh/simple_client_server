@@ -10,4 +10,6 @@ E) Add #includes comments.
 
 D) Setup logger for client and server.
 
+E) Add support to connect many clients to server (fork or thread).
 
+	E1) Create cross plafrom (Windows and GNU/Linux) process runner for client-server.
