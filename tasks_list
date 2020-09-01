@@ -13,3 +13,5 @@ D) Setup logger for client and server.
 E) Add support to connect many clients to server (fork or thread).
 
 	E1) Create cross plafrom (Windows and GNU/Linux) process runner for client-server.
+
+F) Add command line arguments support. For example ./server --port 8080 --address 255.255.255.255
