@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 project(client)
 
 set(SOURCES
-    main.cpp
+    client.cpp
 )
 
 #set(HEADERS

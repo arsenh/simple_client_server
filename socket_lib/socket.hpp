@@ -3,14 +3,15 @@
 #include <string_view>
 #include <string>
 
+struct sockaddr_in;
+
 namespace dolly::network::networklib
 {
 	class TcpSocket
 	{
-	
 	public:
 		using connection = int;
-	
+
 	private:
 		static constexpr int receive_data_size = 200;
 		int mDescriptor;
@@ -19,6 +20,7 @@ namespace dolly::network::networklib
 	
 	private:
 		bool parseAddress(std::string address);
+		sockaddr_in createSocketAddress() const;
 	
 	public:
 		explicit TcpSocket(std::string_view address);

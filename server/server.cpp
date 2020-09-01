@@ -15,7 +15,6 @@ void to_upper(std::string& str)
 	std::transform(std::begin(str), std::end(str), std::begin(str), ::toupper);
 }
 
-
 void handle_client_connection(const Socket& server, const connection socket)
 {
 	while (true) {
@@ -27,6 +26,7 @@ void handle_client_connection(const Socket& server, const connection socket)
 			break;
 		} else if (length == 0) {
 			std::cout << "Client sended FIN: length == 0 = " << length << std::endl;
+			server.closeConnection(socket);
 			break;
 		}
 		to_upper(data);

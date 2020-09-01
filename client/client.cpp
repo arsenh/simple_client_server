@@ -15,7 +15,7 @@ void client_run()
 	std::cout << "Client connected to address: " << address << std::endl;
 	while (true) {
 		std::cout << "Please enter the word: ";
-		std::cin >> send_data;
+		std::getline(std::cin, send_data);
 		if (send_data == "exit") {
 			client.closeConnection(client_socket);
 			break;
