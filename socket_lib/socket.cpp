@@ -3,7 +3,7 @@
 #include <cassert>
 #include <stdexcept>
 #include <string_view>
-#include <iostream>
+#include <cstring>
 
 #ifdef __linux__
 	#include <unistd.h>
@@ -63,23 +63,23 @@ connectToHost() const
 	}
 	return mDescriptor;
 }
-dolly::network::networklib::TcpSocket::connection
+std::pair<dolly::network::networklib::TcpSocket::connection,
+dolly::network::networklib::TcpSocket::hostInfo>
 dolly::network::networklib::TcpSocket::
 acceptConnection() const
 {
 	assert(0 < mDescriptor);
 	sockaddr_in claddr;
 	memset(&claddr, 0, sizeof(claddr));
-	connection con = accept(mDescriptor, (sockaddr*)&claddr, NULL);
+	int clienlen = sizeof(claddr);
+	connection con = accept(mDescriptor, (sockaddr*)&claddr, &clienlen);
 	if (0 > con) {
 		throw std::runtime_error("Server accept Error");
 	}
-	std::string port = std::to_string(ntohs(claddr.sin_port));
-	std::string ip4 = inet_ntoa(claddr.sin_addr);
-	// TODO: fix bug with getting from client port and ip address.
-	//std::cout << "Client ip = " << ip4 << std::endl;
-	//std::cout << "Client port = " << port << std::endl;
-	return con;
+	hostInfo info;
+	info.first = inet_ntoa(claddr.sin_addr);
+	info.second = std::to_string(ntohs(claddr.sin_port));
+	return { con, info };
 }
 
 void dolly::network::networklib::TcpSocket::

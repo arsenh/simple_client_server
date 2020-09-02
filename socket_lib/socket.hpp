@@ -11,6 +11,7 @@ namespace dolly::network::networklib
 	{
 	public:
 		using connection = int;
+		using hostInfo = std::pair<std::string, std::string>;
 
 	private:
 		static constexpr int receive_data_size = 200;
@@ -26,7 +27,7 @@ namespace dolly::network::networklib
 		explicit TcpSocket(std::string_view address);
 		void listenConnections() const;
 		connection connectToHost() const;
-		connection acceptConnection() const;
+		std::pair<connection, hostInfo> acceptConnection() const;
 		void sendData(connection con, std::string_view buffer) const;
 		std::pair<int, std::string> receiveData(connection con) const;
 		void closeConnection(connection con) const;

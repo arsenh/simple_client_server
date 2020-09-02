@@ -37,13 +37,14 @@ void handle_client_connection(const Socket& server, const connection socket)
 
 void server_run()
 {
-	std::string address = "0.0.0.0:8080";
+	std::string address = "192.168.0.48:8080";
 	Socket server{ address };
 	server.listenConnections();
 	std::cout << "Server started on address: " << address << std::endl;
 	while (true) {
-		connection con = server.acceptConnection();
-		std::cout << "\naccept connection" << std::endl;
+		const auto& [con, host_info] = server.acceptConnection();
+		const auto& [ipAddress, port] = host_info;
+		std::cout << "\naccept connection => " << "IPv4: " << ipAddress << " Port: " << port << std::endl;
 		assert(con > 0);
 		handle_client_connection(server, con);
 	}

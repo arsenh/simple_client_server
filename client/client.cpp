@@ -8,7 +8,7 @@ void client_run()
 {
 	using Socket = dolly::network::networklib::TcpSocket;
 	using connection = Socket::connection;
-	const std::string address = "127.0.0.1:8080";
+	const std::string address = "192.168.0.48:8080";
 	std::string send_data;
 	Socket client{ address };
 	const connection client_socket = client.connectToHost();
