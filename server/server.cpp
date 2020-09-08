@@ -1,5 +1,12 @@
-#include "socket.hpp"
+// Headers from this project
+
+// Headers from other projects
 #include "logger.hpp"
+#include "socket.hpp"
+
+// Headers from third party libraries
+
+// Headers from standard libraries
 #include <iostream>
 #include <cassert>
 #include <algorithm>

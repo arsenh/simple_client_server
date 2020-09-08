@@ -1,4 +1,11 @@
+// Headers from this project
+
+// Headers from other projects
 #include "socket.hpp"
+
+// Headers from third party libraries
+
+// Headers from standard libraries
 #include <iostream>
 #include <thread>
 #include <chrono>

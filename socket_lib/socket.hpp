@@ -1,7 +1,15 @@
 #pragma once
 
+// Headers from this project
+
+// Headers from other projects
+
+// Headers from third party libraries
+
+// Headers from standard libraries
 #include <string_view>
 #include <string>
+
 
 struct sockaddr_in;
 

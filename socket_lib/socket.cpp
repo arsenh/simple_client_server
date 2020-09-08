@@ -1,19 +1,23 @@
+// Headers from this project
 #include "socket.hpp"
 
-#include <cassert>
-#include <stdexcept>
-#include <string_view>
-#include <cstring>
+// Headers from other projects
 
+// Headers from third party libraries
 #ifdef __linux__
 	#include <unistd.h>
 	#include <arpa/inet.h>
 #elif WIN32
 	#include <WinSock2.h>
 	#include <Windows.h>
-	#pragma comment(lib,"WS2_32")
+#pragma comment(lib,"WS2_32")
 #endif
 
+// Headers from standard libraries
+#include <cassert>
+#include <stdexcept>
+#include <string_view>
+#include <cstring>
 
 dolly::network::networklib::TcpSocket::
 TcpSocket(std::string_view address)
@@ -63,6 +67,7 @@ connectToHost() const
 	}
 	return mDescriptor;
 }
+
 std::pair<dolly::network::networklib::TcpSocket::connection,
 dolly::network::networklib::TcpSocket::hostInfo>
 dolly::network::networklib::TcpSocket::
