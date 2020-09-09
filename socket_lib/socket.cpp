@@ -95,12 +95,13 @@ sendData(connection con, std::string_view buffer) const
 	send(con, buffer.data(), size, 0);
 }
 
-std::pair<int, std::string> dolly::network::networklib::TcpSocket::
+std::pair<bool, std::string> dolly::network::networklib::TcpSocket::
 receiveData(connection con) const
 {
 	char buffer[receive_data_size];
 	int length = recv(con, buffer, receive_data_size, 0);
-	return { length, std::string{buffer} };
+	bool err = (length <= 0);
+	return { err, std::string{buffer} };
 }
 
 void dolly::network::networklib::TcpSocket::

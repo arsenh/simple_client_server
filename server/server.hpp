@@ -23,7 +23,7 @@ private:
 private:
 	/**
 	 * @brief To Upper string.
-	 * \param str - srtring
+	 * \param str - string
 	 */
 	void to_upper(std::string& str) const noexcept;
 

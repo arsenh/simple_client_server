@@ -69,7 +69,7 @@ namespace dolly::network::networklib
 		 * @brief Receive data from client.
 		 * \return - length of data and received buffer.
 		 */
-		std::pair<int, std::string> receiveData(connection con) const;
+		std::pair<bool, std::string> receiveData(connection con) const;
 		
 		/**
 		 * @brief Close socket connetion.

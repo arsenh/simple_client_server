@@ -19,15 +19,10 @@ void server::to_upper(std::string& str) const noexcept
 void server::handle_client_connection(const connection con) const
 {
 	for (;;) {
-		auto [length, data] = mServerSocket.receiveData(con);
+		auto [err, data] = mServerSocket.receiveData(con);
 		std::cout << "server received data from connectes host" << std::endl;
-		if (length < 0) {
-			//throw std::exception("Server Receive data Error");
-			std::cout << "Client sended FIN: length < 0 = " << length << std::endl;
-			break;
-		}
-		else if (length == 0) {
-			std::cout << "Client sended FIN: length == 0 = " << length << std::endl;
+		if (err) {
+			std::cout << "Client sended FIN " << std::endl;
 			mServerSocket.closeConnection(con);
 			break;
 		}

@@ -4,7 +4,7 @@ B) Handle client receive data error case.
 
 +C) Create separate classes for client and server program => In main only. client.run().
 
-D) Add comments for functions.
++D) Add comments for functions.
 
 +E) Add #includes comments.
 
