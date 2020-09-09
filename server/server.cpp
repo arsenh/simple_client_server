@@ -1,69 +1,58 @@
 // Headers from this project
+#include "server.hpp"
 
 // Headers from other projects
-#include "logger.hpp"
-#include "socket.hpp"
 
 // Headers from third party libraries
 
 // Headers from standard libraries
+#include <string>
+#include <algorithm>
 #include <iostream>
 #include <cassert>
-#include <algorithm>
-#include <string>
-#include <thread>
-#include <chrono>
 
-using Socket = dolly::network::networklib::TcpSocket;
-using connection = Socket::connection;
-
-void to_upper(std::string& str)
+void server::to_upper(std::string& str) const noexcept
 {
 	std::transform(std::begin(str), std::end(str), std::begin(str), ::toupper);
 }
 
-void handle_client_connection(const Socket& server, const connection socket)
+void server::handle_client_connection(const connection con) const
 {
-	while (true) {
-		auto [length, data] = server.receiveData(socket);
+	for (;;) {
+		auto [length, data] = mServerSocket.receiveData(con);
 		std::cout << "server received data from connectes host" << std::endl;
 		if (length < 0) {
 			//throw std::exception("Server Receive data Error");
 			std::cout << "Client sended FIN: length < 0 = " << length << std::endl;
 			break;
-		} else if (length == 0) {
+		}
+		else if (length == 0) {
 			std::cout << "Client sended FIN: length == 0 = " << length << std::endl;
-			server.closeConnection(socket);
+			mServerSocket.closeConnection(con);
 			break;
 		}
 		to_upper(data);
 		std::cout << "Server send UPPER data to host" << std::endl;
-		server.sendData(socket, data);
+		mServerSocket.sendData(con, data);
 	}
 }
 
-void server_run()
+void server::run() const
 {
-	std::string address = "192.168.0.48:8080";
-	Socket server{ address };
-	server.listenConnections();
-	std::cout << "Server started on address: " << address << std::endl;
-	while (true) {
-		const auto& [con, host_info] = server.acceptConnection();
+	mServerSocket.listenConnections();
+	std::cout << "Server started on address: " << mAddress << std::endl;
+	for (;;) {
+		const auto& [con, host_info] = mServerSocket.acceptConnection();
 		const auto& [ipAddress, port] = host_info;
 		std::cout << "\naccept connection => " << "IPv4: " << ipAddress << " Port: " << port << std::endl;
 		assert(con > 0);
-		handle_client_connection(server, con);
+		handle_client_connection(con);
 	}
 }
 
-int main()
+server::server(std::string_view address)
+	: mAddress { address }
+	, mServerSocket{ mAddress }
 {
-	try {
-		server_run();
-		std::cin.get();
-	} catch (const std::exception& ex) {
-		std::cerr << ex.what() << std::endl;
-	}
-    return 0;
+
 }

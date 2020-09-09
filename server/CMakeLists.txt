@@ -3,14 +3,15 @@ cmake_minimum_required(VERSION 3.5)
 project(server)
 
 set(SOURCES
+    main.cpp
     server.cpp
 )
 
-#set(HEADERS
-#    socket.hpp
-#)
+set(HEADERS
+    server.hpp
+)
 
-add_executable(server ${SOURCES}) #${HEADERS})
+add_executable(server ${SOURCES} ${HEADERS})
 
 set_property(TARGET server PROPERTY
     CXX_STANDARD 17

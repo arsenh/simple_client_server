@@ -3,14 +3,15 @@ cmake_minimum_required(VERSION 3.5)
 project(client)
 
 set(SOURCES
+    main.cpp
     client.cpp
 )
 
-#set(HEADERS
-#    socket.hpp
-#)
+set(HEADERS
+    client.hpp
+)
 
-add_executable(client ${SOURCES}) #${HEADERS})
+add_executable(client ${SOURCES} ${HEADERS})
 
 set_property(TARGET client PROPERTY
     CXX_STANDARD 17
