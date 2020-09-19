@@ -1,6 +1,6 @@
 +A) Get client connection PORT and IP address.
 
-B) Handle client receive data error case.
++B) Handle client receive data error case.
 
 +C) Create separate classes for client and server program => In main only. client.run().
 
@@ -8,7 +8,7 @@ B) Handle client receive data error case.
 
 +E) Add #includes comments.
 
-D) Setup logger for client and server.
++D) Setup logger for client and server.
 
 E) Add support to connect many clients to server (fork or thread).
 

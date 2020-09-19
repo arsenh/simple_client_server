@@ -30,6 +30,7 @@ setupLogger(const std::string path, const level l)
 		| std::ios::failbit
 		| std::ifstream::badbit);
 	assert(mFileStream.is_open());
+	return true;
 }
 
 void dolly::logger::logger::

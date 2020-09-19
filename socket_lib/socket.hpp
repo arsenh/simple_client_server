@@ -10,7 +10,6 @@
 #include <string_view>
 #include <string>
 
-
 struct sockaddr_in;
 
 namespace dolly::network::networklib

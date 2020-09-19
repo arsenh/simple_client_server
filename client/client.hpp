@@ -6,6 +6,7 @@
 #include "socket.hpp"
 
 // Headers from third party libraries
+#include "logger.hpp"
 
 // Headers from standard libraries
 #include <string_view>
@@ -15,6 +16,7 @@ class client
 public:
 	using socket = dolly::network::networklib::TcpSocket;
 	using connection = socket::connection;
+	using logger = dolly::logger::logger;
 
 private:
 
