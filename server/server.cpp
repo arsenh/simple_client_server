@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <iostream>
 #include <cassert>
+#include <thread>
 
 void server::to_upper(std::string& str) const noexcept
 {
@@ -45,7 +46,8 @@ void server::run() const
 		logger::get().information("Connection client ip address: " + ipAddress + " port: " + port);
 		std::cout << "\naccept connection => " << "IPv4: " << ipAddress << " Port: " << port << std::endl;
 		assert(con > 0);
-		handle_client_connection(con);
+		std::thread t(&server::handle_client_connection, this, con);
+		t.detach();
 	}
 }
 
