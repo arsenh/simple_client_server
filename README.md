@@ -1,4 +1,4 @@
-# Simple tcp client server
+# Simple tcp client/server
 
 Simple client server application does not depends on third party libraries. Application used only Windows and GNU/Linux native sockets API.
 

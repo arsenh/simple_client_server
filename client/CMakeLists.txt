@@ -21,9 +21,10 @@ target_include_directories(client
     PUBLIC 
         ${CMAKE_SOURCE_DIR}/socket_lib/
         ${CMAKE_SOURCE_DIR}/logger/
+        ${CMAKE_SOURCE_DIR}/command_line_args_parser/
 )
 
 target_link_libraries( client
     PRIVATE 
-        logger socket_lib
+        logger socket_lib command_line_args_parser
 )
