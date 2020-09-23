@@ -2,7 +2,7 @@ E) Add support to connect many clients to server (fork or thread).
 
 	E1) Create cross plafrom (Windows and GNU/Linux) process runner for client-server.
 
-F) Add command line arguments support. For example ./server --port 8080 --address 255.255.255.255
++ F) Add command line arguments support. For example ./server --port 8080 --address 255.255.255.255
 
 G) Add doxygen support and correct the doxygen comments.
 
@@ -10,4 +10,4 @@ V) Add --help functionality
 
 N) Update README.md file.
 
-A) Move to separete lib CommandLineArgsParser
++ A) Move to separete lib CommandLineArgsParser
