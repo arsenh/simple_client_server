@@ -13,7 +13,7 @@
 
 int main(int argc, char* argv[])
 {
-	const auto [err, address] = dolly::CommandLineArgsParser::parse(argc, argv);
+	const auto [err, address] = dolly::commandLineArgsParser::parse(argc, argv);
 	if (err) {
 		exit(1);
 	}

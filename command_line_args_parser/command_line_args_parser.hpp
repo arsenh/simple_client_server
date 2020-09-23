@@ -11,7 +11,7 @@
 
 namespace dolly
 {
-	class CommandLineArgsParser
+	class commandLineArgsParser
 	{
 	private:
 		
@@ -20,34 +20,59 @@ namespace dolly
 		static constexpr char* port = "--port";
 
 	private:
-
+		/**
+		 * Checks correctness of ip address.
+		 * 
+		 * \param address - ip address.
+		 * \return true if address is correct, otherwise false.
+		 */
 		static bool isCorrectAddress(const std::string& address) noexcept;
 
+		/**
+		 * Checks correctness of port.
+		 * 
+		 * \param port - tcp connection port
+		 * \return true if port is correct, otherwise false.
+		 */
 		static bool isCorrectPort(const std::string& port);
 
+		/**
+		 * Returns full connection address {ip adress + port}.
+		 * 
+		 * \param address - ip address
+		 * \param port - port
+		 * \return full connection address. 
+		 */
 		static std::string getAddress(const std::string& address,
 									  const std::string& port) noexcept;
 	public:
 
+		/**
+		 * Parses from command line arguments ip address and port.
+		 * 
+		 * \param argc - count of command line arguments.
+		 * \param argv - arguments
+		 * \return error flag and connetion address.
+		 */
 		static std::pair<bool, std::string> parse(int argc, char* argv[]) noexcept;
 
 	public:
-		~CommandLineArgsParser() = default;
+		~commandLineArgsParser() = default;
 
 		/// @name Deleted special member functions
 		/// @name This class is not default constructible.
-		CommandLineArgsParser() = delete;
+		commandLineArgsParser() = delete;
 
 		/// @brief This class is not copy-constructible
-		CommandLineArgsParser(const CommandLineArgsParser&) = delete;
+		commandLineArgsParser(const commandLineArgsParser&) = delete;
 
 		/// This class is not copy assignable
-		CommandLineArgsParser& operator=(const CommandLineArgsParser&) = delete;
+		commandLineArgsParser& operator=(const commandLineArgsParser&) = delete;
 
 		/// This class is not constructible by move constructor
-		CommandLineArgsParser(CommandLineArgsParser&&) = delete;
+		commandLineArgsParser(commandLineArgsParser&&) = delete;
 
 		/// This class is not assignable by move assignment operator
-		CommandLineArgsParser& operator=(CommandLineArgsParser&&) = delete;
+		commandLineArgsParser& operator=(commandLineArgsParser&&) = delete;
 	};
 }

@@ -10,12 +10,12 @@
 #include <cmath>
 #include <iostream>
 
-bool dolly::CommandLineArgsParser::isCorrectAddress(const std::string& address) noexcept
+bool dolly::commandLineArgsParser::isCorrectAddress(const std::string& address) noexcept
 {
     return std::regex_match(address, std::regex("(\\d{1,3}(\\.\\d{1,3}){3})"));
 }
 
-bool dolly::CommandLineArgsParser::isCorrectPort(const std::string& port)
+bool dolly::commandLineArgsParser::isCorrectPort(const std::string& port)
 {
 	const int minPort = 0;
 	const int maxPort = std::pow(2, 16);
@@ -29,12 +29,12 @@ bool dolly::CommandLineArgsParser::isCorrectPort(const std::string& port)
 	return (minPort <= portInt) && (portInt < maxPort);
 }
 
-std::string dolly::CommandLineArgsParser::getAddress(const std::string& address, const std::string& port) noexcept
+std::string dolly::commandLineArgsParser::getAddress(const std::string& address, const std::string& port) noexcept
 {
 	return address + ":" + port;
 }
 
-std::pair<bool, std::string> dolly::CommandLineArgsParser::parse(int argc, char* argv[]) noexcept
+std::pair<bool, std::string> dolly::commandLineArgsParser::parse(int argc, char* argv[]) noexcept
 {
 	if (argc != argsCount) {
 		std::cerr << "Incorrect count of command line arguments."
