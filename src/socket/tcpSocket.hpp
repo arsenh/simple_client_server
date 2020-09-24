@@ -12,9 +12,9 @@
 
 struct sockaddr_in;
 
-namespace dolly::network::networklib
+namespace dolly::network
 {
-	class TcpSocket
+	class tcpSocket
 	{
 	public:
 
@@ -81,22 +81,22 @@ namespace dolly::network::networklib
 		 * @brief The only available constructor
 		 * @param parent - parent widget of view
 		 */
-		explicit TcpSocket(std::string_view address);
+		explicit tcpSocket(std::string_view address);
 		
 		/// Destructor
-		virtual ~TcpSocket();
+		virtual ~tcpSocket();
 		
 		/// @name Deleted special member functions
 		/// @brief This class is not copy-constructible
-		TcpSocket(const TcpSocket&) = delete;
+		tcpSocket(const tcpSocket&) = delete;
 
 		/// This class is not copy assignable
-		TcpSocket& operator=(const TcpSocket&) = delete;
+		tcpSocket& operator=(const tcpSocket&) = delete;
 
 		/// This class is not constructible by move constructor
-		TcpSocket(TcpSocket&&) = delete;
+		tcpSocket(tcpSocket&&) = delete;
 
 		/// This class is not assignable by move assignment operator
-		TcpSocket& operator=(TcpSocket&&) = delete;
+		tcpSocket& operator=(tcpSocket&&) = delete;
 	};
 }

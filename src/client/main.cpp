@@ -2,7 +2,6 @@
 #include "client.hpp"
 
 // Headers from other projects
-#include "socket_lib/socket.hpp"
 #include "logger/logger.hpp"
 #include "command_line_args_parser/command_line_args_parser.hpp"
 

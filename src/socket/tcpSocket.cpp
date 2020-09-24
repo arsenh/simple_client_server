@@ -1,5 +1,5 @@
 // Headers from this project
-#include "socket.hpp"
+#include "tcpSocket.hpp"
 
 // Headers from other projects
 
@@ -19,8 +19,8 @@
 #include <string_view>
 #include <cstring>
 
-dolly::network::networklib::TcpSocket::
-TcpSocket(std::string_view address)
+dolly::network::tcpSocket::
+tcpSocket(std::string_view address)
 	: mDescriptor{0}
 	, mIpV4{}
 	, mPort{}
@@ -42,7 +42,7 @@ TcpSocket(std::string_view address)
 	parseAddress(std::string(address));
 }
 
-void dolly::network::networklib::TcpSocket::
+void dolly::network::tcpSocket::
 listenConnections() const
 {
 	assert(0 < mDescriptor);
@@ -55,8 +55,8 @@ listenConnections() const
 	}
 }
 
-dolly::network::networklib::TcpSocket::connection
-dolly::network::networklib::TcpSocket::
+dolly::network::tcpSocket::connection
+dolly::network::tcpSocket::
 connectToHost() const
 {
 	assert(0 < mDescriptor);
@@ -68,9 +68,9 @@ connectToHost() const
 	return mDescriptor;
 }
 
-std::pair<dolly::network::networklib::TcpSocket::connection,
-dolly::network::networklib::TcpSocket::hostInfo>
-dolly::network::networklib::TcpSocket::
+std::pair<dolly::network::tcpSocket::connection,
+dolly::network::tcpSocket::hostInfo>
+dolly::network::tcpSocket::
 acceptConnection() const
 {
 	assert(0 < mDescriptor);
@@ -87,7 +87,7 @@ acceptConnection() const
 	return { con, info };
 }
 
-void dolly::network::networklib::TcpSocket::
+void dolly::network::tcpSocket::
 sendData(connection con, std::string_view buffer) const
 {
 	assert(0 < mDescriptor);
@@ -95,7 +95,7 @@ sendData(connection con, std::string_view buffer) const
 	send(con, buffer.data(), size, 0);
 }
 
-std::pair<bool, std::string> dolly::network::networklib::TcpSocket::
+std::pair<bool, std::string> dolly::network::tcpSocket::
 receiveData(connection con) const
 {
 	char buffer[receive_data_size];
@@ -104,7 +104,7 @@ receiveData(connection con) const
 	return { err, std::string{buffer} };
 }
 
-void dolly::network::networklib::TcpSocket::
+void dolly::network::tcpSocket::
 closeConnection(connection con) const
 {
 	assert(0 < mDescriptor);
@@ -117,7 +117,7 @@ closeConnection(connection con) const
 	#endif
 }
 
-bool dolly::network::networklib::TcpSocket::
+bool dolly::network::tcpSocket::
 parseAddress(std::string address)
 {
 	const size_t it = address.find(":");
@@ -129,7 +129,7 @@ parseAddress(std::string address)
 	return true;
 }
 
-sockaddr_in dolly::network::networklib::TcpSocket::
+sockaddr_in dolly::network::tcpSocket::
 createSocketAddress() const
 {
 	sockaddr_in addr;
@@ -140,8 +140,8 @@ createSocketAddress() const
 	return addr;
 }
 
-dolly::network::networklib::TcpSocket::
-~TcpSocket()
+dolly::network::tcpSocket::
+~tcpSocket()
 {
 	assert(0 < mDescriptor);
 	closeConnection(mDescriptor);

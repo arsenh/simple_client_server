@@ -1,29 +1,29 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(socket_lib)
+project(socket)
 
 set(SOURCES
-    socket.cpp
+    tcpSocket.cpp
 )
 
 set(HEADERS
-    socket.hpp
+    tcpSocket.hpp
 )
 
-add_library(socket_lib STATIC ${SOURCES} ${HEADERS})
+add_library(socket STATIC ${SOURCES} ${HEADERS})
 
-set_target_properties( socket_lib
+set_target_properties( socket
   PROPERTIES
   ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/lib"
   LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/lib"
   RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin"
 )
 
-set_property(TARGET socket_lib PROPERTY
+set_property(TARGET socket PROPERTY
     CXX_STANDARD 17
 )
 
-target_link_libraries( socket_lib
+target_link_libraries( socket
     PRIVATE
         logger
 )

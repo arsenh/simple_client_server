@@ -33,5 +33,5 @@ target_include_directories(client
 
 target_link_libraries( client
     PRIVATE 
-        logger socket_lib command_line_args_parser
+        logger socket command_line_args_parser
 )

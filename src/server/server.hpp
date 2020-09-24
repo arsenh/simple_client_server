@@ -3,7 +3,7 @@
 // Headers from this project
 
 // Headers from other projects
-#include "socket_lib/socket.hpp"
+#include "socket/tcpSocket.hpp"
 
 // Headers from third party libraries
 #include "logger/logger.hpp"
@@ -14,13 +14,13 @@
 class server
 {
 public:
-	using socket = dolly::network::networklib::TcpSocket;
-	using connection = socket::connection;
+	using tcpSocket = dolly::network::tcpSocket;
+	using connection = tcpSocket::connection;
 	using logger = dolly::logger::logger;
 
 private:
 	const std::string_view mAddress;
-	socket mServerSocket;
+	tcpSocket mServerSocket;
 
 private:
 	/**
