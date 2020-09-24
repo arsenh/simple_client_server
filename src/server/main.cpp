@@ -1,10 +1,9 @@
 // Headers from this project
-#include "client.hpp"
 
 // Headers from other projects
-#include "socket.hpp"
-#include "logger.hpp"
-#include "command_line_args_parser.hpp"
+#include "logger/logger.hpp"
+#include "server.hpp"
+#include "command_line_args_parser/command_line_args_parser.hpp"
 
 // Headers from third party libraries
 
@@ -20,11 +19,11 @@ int main(int argc, char* argv[])
 	}
 	using logger = dolly::logger::logger;
 	using loggerLevel = dolly::logger::logger::level;
-	client c{address};
+	server s{ address };
 	try {
 		logger::get().setupLogger();
 		logger::get().setLevel(loggerLevel::trace);
-		c.run();
+		s.run();
 	}
 	catch (const std::exception& ex) {
 		std::cerr << ex.what() << std::endl;

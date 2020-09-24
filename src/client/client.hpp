@@ -3,10 +3,10 @@
 // Headers from this project
 
 // Headers from other projects
-#include "socket.hpp"
+#include "socket_lib/socket.hpp"
 
 // Headers from third party libraries
-#include "logger.hpp"
+#include "logger/logger.hpp"
 
 // Headers from standard libraries
 #include <string_view>

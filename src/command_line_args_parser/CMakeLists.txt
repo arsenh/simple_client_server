@@ -12,6 +12,13 @@ set(HEADERS
 
 add_library(command_line_args_parser STATIC ${SOURCES} ${HEADERS})
 
+set_target_properties( command_line_args_parser
+  PROPERTIES
+  ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/lib"
+  LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/lib"
+  RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin"
+)
+
 set_property(TARGET command_line_args_parser PROPERTY
     CXX_STANDARD 17
 )

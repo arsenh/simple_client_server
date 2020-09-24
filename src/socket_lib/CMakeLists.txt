@@ -12,6 +12,13 @@ set(HEADERS
 
 add_library(socket_lib STATIC ${SOURCES} ${HEADERS})
 
+set_target_properties( socket_lib
+  PROPERTIES
+  ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/lib"
+  LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/lib"
+  RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin"
+)
+
 set_property(TARGET socket_lib PROPERTY
     CXX_STANDARD 17
 )
