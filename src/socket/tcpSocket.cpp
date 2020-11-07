@@ -76,6 +76,10 @@ acceptConnection() const
 	assert(0 < mDescriptor);
 	sockaddr_in claddr;
 	memset(&claddr, 0, sizeof(claddr));
+#ifdef WIN32
+	using socklen_t = int;
+#endif // WIN32
+
     socklen_t i = sizeof(claddr);
 	connection con = accept(mDescriptor, (sockaddr*)&claddr, &i);
 	if (0 > con) {

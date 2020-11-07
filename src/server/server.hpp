@@ -4,12 +4,14 @@
 
 // Headers from other projects
 #include "socket/tcpSocket.hpp"
+#include "logger/logger.hpp"
 
 // Headers from third party libraries
-#include "logger/logger.hpp"
+#include <ws2tcpip.h>
 
 // Headers from standard libraries
 #include <string_view>
+#include <vector>
 
 class server
 {
@@ -21,25 +23,30 @@ public:
 private:
 	const std::string_view mAddress;
 	tcpSocket mServerSocket;
+	std::vector<connection> mClientSockets;
 
 private:
 	/**
 	 * @brief To Upper string.
 	 * \param str - string
 	 */
-	static void to_upper(std::string& str) noexcept;
+	static void toUpper(std::string& str) noexcept;
+
+	void acceptClientConnection();
 
 	/**
 	 * . Handle the client connection.
 	 * 
 	 * \param con - client connection descriptor.
 	 */
-	void handle_client_connection(const connection con) const;
+	void handleClientConnection(const connection con) const;
+
+	std::pair<fd_set, int> initSocketSet(const connection master) const;
 
 public:
 
 	/// @brief Runs the server socket.
-	void run() const;
+	void run();
 public:
 	/**
 	 * @brief The only available constructor

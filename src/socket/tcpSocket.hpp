@@ -24,7 +24,7 @@ namespace dolly::network
 	private:
 
 		static constexpr int receive_data_size = 200;
-		int mDescriptor;
+		connection mDescriptor;
 		std::string mIpV4;
 		std::string mPort;
 	
@@ -75,6 +75,10 @@ namespace dolly::network
 		 * \param con - connetion descriptor.
 		 */
 		void closeConnection(connection con) const;
+
+		connection getConnection() const noexcept {
+			return mDescriptor;
+		}
 
 	public:
 		/**
