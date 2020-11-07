@@ -16,8 +16,8 @@ namespace dolly
 	private:
 		
 		static constexpr int argsCount = 5;
-		static constexpr char* address = "--address";
-		static constexpr char* port = "--port";
+		static constexpr const char* address = "--address";
+		static constexpr const char* port = "--port";
 
 	private:
 		/**

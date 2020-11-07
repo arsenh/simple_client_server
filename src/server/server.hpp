@@ -27,7 +27,7 @@ private:
 	 * @brief To Upper string.
 	 * \param str - string
 	 */
-	void to_upper(std::string& str) const noexcept;
+	static void to_upper(std::string& str) noexcept;
 
 	/**
 	 * . Handle the client connection.

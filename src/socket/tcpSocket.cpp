@@ -76,8 +76,8 @@ acceptConnection() const
 	assert(0 < mDescriptor);
 	sockaddr_in claddr;
 	memset(&claddr, 0, sizeof(claddr));
-	int clienlen = sizeof(claddr);
-	connection con = accept(mDescriptor, (sockaddr*)&claddr, &clienlen);
+    socklen_t i = sizeof(claddr);
+	connection con = accept(mDescriptor, (sockaddr*)&claddr, &i);
 	if (0 > con) {
 		throw std::runtime_error("Server accept Error");
 	}

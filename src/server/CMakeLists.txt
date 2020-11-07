@@ -13,6 +13,12 @@ set(HEADERS
 
 add_executable(server ${SOURCES} ${HEADERS})
 
+if (UNIX)
+    set(THREADS_PREFER_PTHREAD_FLAG ON)
+    find_package(Threads REQUIRED)
+    target_link_libraries(server PRIVATE Threads::Threads)
+endif (UNIX)
+
 set_target_properties( server
   PROPERTIES
   ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/lib"

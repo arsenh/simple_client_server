@@ -12,7 +12,7 @@
 #include <cassert>
 #include <thread>
 
-void server::to_upper(std::string& str) const noexcept
+void server::to_upper(std::string& str) noexcept
 {
 	std::transform(std::begin(str), std::end(str), std::begin(str), ::toupper);
 }
