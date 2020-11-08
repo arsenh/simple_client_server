@@ -53,7 +53,7 @@ std::pair<fd_set, int> server::initSocketSet(const connection master) const
 	if (mClientSockets.empty()) {
 		max = master;
 	} else {
-		int max = (std::max)(master,
+		max = (std::max)(master,
 			*std::max_element(std::cbegin(mClientSockets),
 								std::cend(mClientSockets)));
 	}
