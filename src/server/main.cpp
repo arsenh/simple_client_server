@@ -24,8 +24,7 @@ int main(int argc, char* argv[])
 		logger::get().setupLogger();
 		logger::get().setLevel(loggerLevel::trace);
 		s.run();
-	}
-	catch (const std::exception& ex) {
+	} catch (const std::exception& ex) {
 		std::cerr << ex.what() << std::endl;
 	}
 	return 0;

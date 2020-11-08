@@ -7,7 +7,10 @@
 #include "logger/logger.hpp"
 
 // Headers from third party libraries
+#ifdef WIN32
 #include <ws2tcpip.h>
+#endif // WIN32
+
 
 // Headers from standard libraries
 #include <string_view>
@@ -39,7 +42,7 @@ private:
 	 * 
 	 * \param con - client connection descriptor.
 	 */
-	void handleClientConnection(const connection con) const;
+	void handleClientConnection(const connection con);
 
 	std::pair<fd_set, int> initSocketSet(const connection master) const;
 

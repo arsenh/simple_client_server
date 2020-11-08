@@ -25,7 +25,7 @@ void server::acceptClientConnection()
 	logger::get().debug("Server accepted the client connection.");
 }
 
-void server::handleClientConnection(const connection con) const
+void server::handleClientConnection(const connection con)
 {
 	auto [err, data] = mServerSocket.receiveData(con);
 	logger::get().debug("Server received data from client connetion");
@@ -33,6 +33,7 @@ void server::handleClientConnection(const connection con) const
 		std::cout << "Client closes the connection" << std::endl;
 		logger::get().error("Client sended FIN. Server closes the connection");
 		mServerSocket.closeConnection(con);
+		mClientSockets.erase(std::find(std::cbegin(mClientSockets), std::cend(mClientSockets), con));
 		return;
 	}
 	toUpper(data);
