@@ -18,6 +18,7 @@ namespace dolly
 		static constexpr int argsCount = 5;
 		static constexpr const char* address = "--address";
 		static constexpr const char* port = "--port";
+		static constexpr const char* help = "--help";
 
 	private:
 		/**
@@ -45,6 +46,12 @@ namespace dolly
 		 */
 		static std::string getAddress(const std::string& address,
 									  const std::string& port) noexcept;
+
+		/**
+		 * Show --help command line argument message.
+		 */
+		static void show_help() noexcept;
+
 	public:
 
 		/**

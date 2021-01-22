@@ -9,6 +9,7 @@
 #include <regex>
 #include <cmath>
 #include <iostream>
+#include <string_view>
 
 bool dolly::commandLineArgsParser::isCorrectAddress(const std::string& address) noexcept
 {
@@ -34,8 +35,23 @@ std::string dolly::commandLineArgsParser::getAddress(const std::string& address,
 	return address + ":" + port;
 }
 
+void dolly::commandLineArgsParser::show_help() noexcept
+{
+#ifdef __linux__
+	std::string_view message = "./[client or server].exe --address <ipv4 address> --port <port>";
+#elif WIN32
+	std::string_view message = "[client or server].exe --address <ipv4 address> --port <port>";
+#endif
+	std::cout << "Usage:" << std::endl;
+	std::cout << message << std::endl;
+}
+
 std::pair<bool, std::string> dolly::commandLineArgsParser::parse(int argc, char* argv[]) noexcept
 {
+	if ((argc == 2) && (0 == strcmp(argv[1], help))) {
+		show_help();
+		return { true, {} };
+	}
 	if (argc != argsCount) {
 		std::cerr << "Incorrect count of command line arguments."
 			<< " \nFor more information use --help option." << std::endl;
