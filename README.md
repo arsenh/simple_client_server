@@ -15,3 +15,14 @@ Run following commands to build the project.
 - `mkdir build`
 - `cmake .. -G "Visual Studio 16 2019"`
 - `Open simple_client_server.sln file from Visual Studio 2019.`
+
+
+#### Usage
+
+Windows
+- `server.exe --address 127.0.01 --port 8080`
+- `client.exe --address 127.0.01 --port 8080`
+
+GNU/Linux
+- `./server --address 127.0.01 --port 8080`
+- `./client --address 127.0.01 --port 8080`
